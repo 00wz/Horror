@@ -27,3 +27,15 @@ FVector UUtils::GetRandomVectorOnCircle(float Radius)
 	result *= Radius;
 	return result;
 }
+
+bool UUtils::ContainsImplementation(TArray<UObject*> Array, TSubclassOf<UInterface> Interface)
+{
+	for (auto Element : Array)
+	{
+		if(Element->IsA(Interface->StaticClass()))
+		{
+			return true;
+		}
+	}
+	return false;
+}
