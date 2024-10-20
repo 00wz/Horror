@@ -18,3 +18,12 @@ void UUtils::SetSightRadius(UAIPerceptionComponent* PerceptionComponent, float S
 		SightConfiguration->LoseSightRadius = LoseSightRadius;
 	}
 }
+
+FVector UUtils::GetRandomVectorOnCircle(float Radius)
+{
+	FVector result = FMath::VRand();
+	result = FVector{ result.X, result.Y, 0.0f };
+	result.Normalize();
+	result *= Radius;
+	return result;
+}

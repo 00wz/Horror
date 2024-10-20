@@ -17,4 +17,7 @@ class HORROR_API UUtils : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, Category = "HorrorUtils")
 	static void SetSightRadius(UAIPerceptionComponent* PerceptionComponent, float SightRadius, float LoseSightRadius);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "HorrorUtils")
+	static FVector GetRandomVectorOnCircle(float Radius);
 };
