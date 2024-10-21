@@ -39,3 +39,24 @@ bool UUtils::ContainsImplementation(TArray<UObject*> Array, TSubclassOf<UInterfa
 	}
 	return false;
 }
+
+void UUtils::BindActorToInput(AActor* Listener, const FName ActionName, const EInputEvent KeyEvent,
+	bool ExecuteWhenPaused, FUserInputEvent Func)
+{
+	if(!IsValid(Listener->InputComponent))
+	{
+			Listener->InputComponent = NewObject<UInputComponent>(Listener);
+        	Listener->InputComponent->RegisterComponent();
+	}
+
+	if (Listener->InputComponent)
+	{
+		UDelegateContainer* delegateContainer = NewObject<UDelegateContainer>(Listener);
+		delegateContainer->InputEvent = Func;
+		FInputActionBinding& bindingStruct =Listener->InputComponent->BindAction(ActionName,
+			KeyEvent, delegateContainer, &UDelegateContainer::CallEvent);
+		bindingStruct.bExecuteWhenPaused = ExecuteWhenPaused;
+		
+		Listener->EnableInput(Listener->GetWorld()->GetFirstPlayerController());
+	}  
+}

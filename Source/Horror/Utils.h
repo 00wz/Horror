@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DelegateContainer.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Utils.generated.h"
@@ -32,4 +33,12 @@ class HORROR_API UUtils : public UBlueprintFunctionLibrary
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "HorrorUtils")
 	static bool ContainsImplementation(TArray<UObject*> Array, TSubclassOf<UInterface> Interface);
+	
+	/*
+	 * Binds a delegate function to an Action defined in the project settings.
+	 * (Deletes old bindings to the specified action!)
+	 */
+	UFUNCTION(BlueprintCallable, Category = "HorrorUtils")
+	static void BindActorToInput(AActor* Listener, const FName ActionName, const EInputEvent KeyEvent,
+		bool ExecuteWhenPaused, FUserInputEvent Func);
 };
