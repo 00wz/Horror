@@ -40,8 +40,13 @@ bool UUtils::ContainsImplementation(TArray<UObject*> Array, TSubclassOf<UInterfa
 	return false;
 }
 
+bool UUtils::WasRecentlyRendered(AActor* Actor, float Tolerance)
+{
+	return Actor->WasRecentlyRendered(Tolerance);
+}
+
 void UUtils::BindActorToInput(AActor* Listener, const FName ActionName, const EInputEvent KeyEvent,
-	bool ExecuteWhenPaused, FUserInputEvent Func)
+                              bool ExecuteWhenPaused, FUserInputEvent Func)
 {
 	if(!IsValid(Listener->InputComponent))
 	{

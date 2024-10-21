@@ -33,6 +33,12 @@ class HORROR_API UUtils : public UBlueprintFunctionLibrary
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "HorrorUtils")
 	static bool ContainsImplementation(TArray<UObject*> Array, TSubclassOf<UInterface> Interface);
+
+	/*
+	 * Returns true if this actor has been rendered "recently", with a tolerance in seconds to define what "recent" means.
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "HorrorUtils")
+	static bool WasRecentlyRendered(AActor* Actor, float Tolerance );
 	
 	/*
 	 * Binds a delegate function to an Action defined in the project settings.
