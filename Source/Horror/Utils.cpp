@@ -50,8 +50,9 @@ void UUtils::BindActorToInput(AActor* Listener, const FName ActionName, const EI
 {
 	if(!IsValid(Listener->InputComponent))
 	{
-			Listener->InputComponent = NewObject<UInputComponent>(Listener);
-        	Listener->InputComponent->RegisterComponent();
+		Listener->InputComponent = NewObject<UInputComponent>(Listener);
+        Listener->InputComponent->RegisterComponent();
+		UE_LOG(LogTemp, Log, TEXT("UUtils::BindActorToInput: created InputComponent"));
 	}
 
 	if (Listener->InputComponent)
@@ -63,5 +64,7 @@ void UUtils::BindActorToInput(AActor* Listener, const FName ActionName, const EI
 		bindingStruct.bExecuteWhenPaused = ExecuteWhenPaused;
 		
 		Listener->EnableInput(Listener->GetWorld()->GetFirstPlayerController());
-	}  
+		
+		UE_LOG(LogTemp, Log, TEXT("UUtils::BindActorToInput: binded action"));
+	}
 }
