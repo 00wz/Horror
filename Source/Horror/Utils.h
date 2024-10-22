@@ -41,6 +41,7 @@ class HORROR_API UUtils : public UBlueprintFunctionLibrary
 	static bool WasRecentlyRendered(AActor* Actor, float Tolerance );
 	
 	/*
+	 *[Do not use it! It doesn't always work]
 	 * Binds a delegate function to an Action defined in the project settings.
 	 * (Deletes old bindings to the specified action!)
 	 */

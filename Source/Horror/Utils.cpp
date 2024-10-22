@@ -3,6 +3,7 @@
 
 #include "Utils.h"
 
+#include "Kismet/GameplayStatics.h"
 #include "Perception/AISenseConfig_Sight.h"
 #include "Perception/AISense_Sight.h"
 
@@ -52,7 +53,6 @@ void UUtils::BindActorToInput(AActor* Listener, const FName ActionName, const EI
 	{
 		Listener->InputComponent = NewObject<UInputComponent>(Listener);
         Listener->InputComponent->RegisterComponent();
-		UE_LOG(LogTemp, Log, TEXT("UUtils::BindActorToInput: created InputComponent"));
 	}
 
 	if (Listener->InputComponent)
@@ -63,7 +63,7 @@ void UUtils::BindActorToInput(AActor* Listener, const FName ActionName, const EI
 			KeyEvent, delegateContainer, &UDelegateContainer::CallEvent);
 		bindingStruct.bExecuteWhenPaused = ExecuteWhenPaused;
 		
-		Listener->EnableInput(Listener->GetWorld()->GetFirstPlayerController());
+		Listener->EnableInput(UGameplayStatics::GetPlayerController(Listener->GetWorld(), 0));
 		
 		UE_LOG(LogTemp, Log, TEXT("UUtils::BindActorToInput: binded action"));
 	}
